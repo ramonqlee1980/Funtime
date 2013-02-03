@@ -8,7 +8,7 @@
 
 #import "CollectionViewController.h"
 #import "PSCollectionViewCell.h"
-#import "CellView.h"
+#import "ImageWithTextCell.h"
 #import "UIImageView+WebCache.h"
 #import "UITableViewCellResponse.h"
 @interface CollectionViewController ()
@@ -110,27 +110,22 @@
 
 #pragma mark PSCollectionViewDataSource
 - (PSCollectionViewCell *)collectionView:(PSCollectionView *)collectionView viewAtIndex:(NSInteger)index {
-    NSDictionary *item = [self.items objectAtIndex:index];
+    Response *item = [self.items objectAtIndex:index];
     
     // You should probably subclass PSCollectionViewCell
-    CellView *v = (CellView *)[self.collectionView dequeueReusableView];
+    ImageWithTextCell *v = (ImageWithTextCell *)[self.collectionView dequeueReusableView];
+    CGRect rc = CGRectMake(0, 0, kDeviceWidth/self.collectionView.numColsPortrait, KDeviceHeight);
     if(v == nil) {
-        NSArray *nib =
-        [[NSBundle mainBundle] loadNibNamed:@"CellView" owner:self options:nil];
-        v = [nib objectAtIndex:0];
+        v = [[[ImageWithTextCell alloc]initWithFrame:rc]autorelease];
     }
-  
-    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://imgur.com/%@%@", [item objectForKey:@"hash"], [item objectForKey:@"ext"]]];
+    v.frame = rc;
+    v.response = item;
     
-    [v.picView  setImageWithURL:URL placeholderImage:[UIImage imageNamed:@"Luma"]];
     return v;
 }
 
 - (CGFloat)heightForViewAtIndex:(NSInteger)index {
-    NSDictionary *item = [self.items objectAtIndex:index];
-    
-    // You should probably subclass PSCollectionViewCell
-    return [PSCollectionViewCell heightForViewWithObject:item inColumnWidth:self.collectionView.colWidth];
+    return [ImageWithTextCell measureCell:[self.items objectAtIndex:index] width:kDeviceWidth/self.collectionView.numColsPortrait].height;
 }
 
 - (void)collectionView:(PSCollectionView *)collectionView didSelectView:(PSCollectionViewCell *)view atIndex:(NSInteger)index {

@@ -47,25 +47,7 @@
     [self loadMoreData];
 }
 
-#pragma mark PSCollectionViewDataSource
-- (PSCollectionViewCell *)collectionView:(PSCollectionView *)collectionView viewAtIndex:(NSInteger)index {
-    Response *item = [self.items objectAtIndex:index];
-    
-    // You should probably subclass PSCollectionViewCell
-    ImageWithTextCell *v = (ImageWithTextCell *)[self.collectionView dequeueReusableView];
-    CGRect rc = CGRectMake(0, 0, kDeviceWidth/self.collectionView.numColsPortrait, KDeviceHeight);
-    if(v == nil) {
-        v = [[[ImageWithTextCell alloc]initWithFrame:rc]autorelease];
-    }
-    v.frame = rc;
-    v.response = item;
-    
-    return v;
-}
 
-- (CGFloat)heightForViewAtIndex:(NSInteger)index {
-    return [ImageWithTextCell measureCell:[self.items objectAtIndex:index] width:kDeviceWidth/self.collectionView.numColsPortrait].height;
-}
 
 #pragma mark - Methods
 -(void)refreshData
