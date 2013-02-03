@@ -13,17 +13,23 @@
 #import "CommonHelper.h"
 #import "AppDelegate.h"
 
-#define kTimelineJson @"http://www.idreems.com/php/embarrasepisode/embarrassing.php?type=image_latest&page=1&count=20"
-#define kFileName @"timelinejson"
+#define kTimelineJson @"http://www.idreems.com/php/embarrasepisode/embarrassing.php?type=image_latest&page=%d&count=20"
+#define kRefreshFileName @"timelinejson"
+#define kLoadMoreFileName @"timelinejson"
+
 #define kDestinationName @"Timeline"
 #define kDataPath @"data"
+#define kInitPage 1
 
-#define kTimelineJsonChanged @"kTimelineJsonChanged"
+#define kTimelineJsonRefreshChanged @"kTimelineJsonRefreshChanged"
+#define kTimelineJsonLoadMoreChanged @"kTimelineJsonLoadMoreChanged"
 
 #define kWeiboTimelineResponseDataJson @"data"
 
 @interface QiushiImageLatestController ()
-
+{
+    NSUInteger mCurrentLoadMorePage;
+}
 @end
 
 @implementation QiushiImageLatestController
@@ -38,7 +44,7 @@
 
 - (void)pullPsCollectionViewDidTriggerLoadMore:(PullPsCollectionView *)pullTableView
 {
-    
+    [self loadMoreData];
 }
 
 #pragma mark PSCollectionViewDataSource
@@ -71,6 +77,10 @@
     [self notifyDataChanged];
     
     FileModel* model = [self fileModel];
+    model.fileURL = [NSString stringWithFormat:kTimelineJson,kInitPage];//for the latest page
+    model.notificationName = kTimelineJsonRefreshChanged;
+    model.fileName = kRefreshFileName;
+    
     [APPDELEGATE beginRequest:model isBeginDown:YES setAllowResumeForFileDownloads:NO];
     
     [[CommonHelper getTargetBookPath:model.destPath] stringByAppendingPathComponent:model.fileName];
@@ -79,6 +89,10 @@
 {
     //TODO::more data
     FileModel* model = [self fileModel];
+    model.fileURL = [NSString stringWithFormat:kTimelineJson,(++mCurrentLoadMorePage)];
+    model.notificationName = kTimelineJsonLoadMoreChanged;
+    model.fileName = kLoadMoreFileName;
+    
     [APPDELEGATE beginRequest:model isBeginDown:YES setAllowResumeForFileDownloads:NO];
     
     [[CommonHelper getTargetBookPath:model.destPath] stringByAppendingPathComponent:model.fileName];
@@ -93,10 +107,10 @@
     fileModel = [[FileModel alloc]init];
     //get data
     
-    fileModel.fileURL = kTimelineJson;
-    fileModel.fileName = kFileName;
+//    fileModel.fileURL = kTimelineJson;
+    fileModel.fileName = kRefreshFileName;
     fileModel.destPath = kDestinationName;
-    fileModel.notificationName = kTimelineJsonChanged;
+    fileModel.notificationName = kTimelineJsonRefreshChanged;
     
     return fileModel;
 }
@@ -122,8 +136,6 @@
         NSError* error;
         id res = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
         if (res && [res isKindOfClass:[NSDictionary class]]) {
-//            [dataArray removeAllObjects];
-            //TODO::add or insert data
             NSArray* arr = [res objectForKey:kWeiboTimelineResponseDataJson];
             for (id item in arr) {
                 Response* sts = [Response statusWithJsonDictionary:item];
@@ -142,7 +154,7 @@
 }
 
 -(void)didGetTimeLine:(NSNotification*)notification
-{
+{    
     if(notification)
     {
         if([notification.object isKindOfClass:[NSString class]])
@@ -152,9 +164,17 @@
             {
                 self.items = [[NSMutableArray alloc]initWithCapacity:0];
             }
-            //TODO::add or insert data
-//            [self.items removeAllObjects];
-            [self.items addObjectsFromArray:[self loadContent:fileDir]];
+            //TODO::remove duplicate one
+            NSMutableArray* dataArray = [self loadContent:fileDir];
+            if ([kTimelineJsonRefreshChanged isEqualToString:notification.name] && [self.items count]>0) {
+                [dataArray addObjectsFromArray:self.items];
+                [self.items removeAllObjects];
+                [self.items addObjectsFromArray:dataArray];
+            }
+            else
+            {
+                [self.items addObjectsFromArray:dataArray];
+            }
         }
         else if([notification.object isKindOfClass:[NSError class]])//error
         {
@@ -189,7 +209,12 @@
     self.navigationItem.rightBarButtonItem = backButton;
     [backButton release];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetTimeLine:)    name:kTimelineJsonChanged          object:nil];
+    mCurrentLoadMorePage = kInitPage;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetTimeLine:)    name:kTimelineJsonRefreshChanged          object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetTimeLine:)    name:kTimelineJsonLoadMoreChanged          object:nil];
+    
     [self refreshData];
 }
 
