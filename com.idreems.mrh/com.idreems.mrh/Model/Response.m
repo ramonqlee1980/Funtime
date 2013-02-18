@@ -14,6 +14,22 @@
 @synthesize thumbnailUrl;
 @synthesize largeUrl;
 
+-(BOOL)isEqual:(id)object
+{
+    if(!object)
+    {
+        return NO;
+    }
+    Response* cmp = (Response*)object;
+    if(0==[self.description length])
+    {
+        return [self.thumbnailUrl isEqualToString:cmp.thumbnailUrl];
+    }
+    else
+    {
+        return [self.description isEqualToString:cmp.description];
+    }
+}
 - (Response*)initWithJsonDictionary:(NSDictionary*)dict
 {
     if (self = [super init]) {

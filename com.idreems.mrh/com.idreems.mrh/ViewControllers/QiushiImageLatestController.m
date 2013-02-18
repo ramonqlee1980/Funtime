@@ -13,12 +13,16 @@
 #import "CommonHelper.h"
 #import "AppDelegate.h"
 
+//url and related file name on local machine
+//url is pulled from server and others are derived from this url
 #define kTimelineJson @"http://www.idreems.com/php/embarrasepisode/embarrassing.php?type=image_latest&page=%d&count=20"
+#define kDataPath @"data"
+#define kDestinationName @"Timeline"
+
 #define kRefreshFileName @"timelinejson"
 #define kLoadMoreFileName @"timelinejson"
 
-#define kDestinationName @"Timeline"
-#define kDataPath @"data"
+
 #define kInitPage 1
 
 #define kTimelineJsonRefreshChanged @"kTimelineJsonRefreshChanged"
@@ -69,7 +73,7 @@
 }
 -(void)loadMoreData
 {
-    //TODO::more data
+    //more data
     FileModel* model = [self fileModel];
     model.fileURL = [NSString stringWithFormat:kTimelineJson,(++mCurrentLoadMorePage)];
     model.notificationName = kTimelineJsonLoadMoreChanged;
@@ -146,16 +150,18 @@
             {
                 self.items = [[NSMutableArray alloc]initWithCapacity:0];
             }
-            //TODO::remove duplicate one
+            //remove duplicate one
             NSMutableArray* dataArray = [self loadContent:fileDir];
             if ([kTimelineJsonRefreshChanged isEqualToString:notification.name] && [self.items count]>0) {
-                [dataArray addObjectsFromArray:self.items];
+                [self mergeArray:dataArray withObjects:self.items];
+//                [dataArray addObjectsFromArray:self.items];
                 [self.items removeAllObjects];
                 [self.items addObjectsFromArray:dataArray];
             }
             else
             {
-                [self.items addObjectsFromArray:dataArray];
+                [self mergeArray:self.items withObjects:dataArray];
+//                [self.items addObjectsFromArray:dataArray];
             }
         }
         else if([notification.object isKindOfClass:[NSError class]])//error
@@ -167,6 +173,21 @@
     
     
     [self performSelectorOnMainThread:@selector(didGetTimeLineOnMainThread) withObject:nil waitUntilDone:TRUE];
+}
+//merge and remove duplicate items
+-(void)mergeArray:(NSMutableArray*)desArray withObjects:(NSArray *)objects
+{    
+    if(!desArray || !objects)
+    {
+        return;
+    }
+    
+    for (NSObject* obj in objects) {
+        if(NSNotFound==[desArray indexOfObject:obj])
+        {
+            [desArray addObject:obj];
+        }
+    }
 }
 
 #pragma mark view lifecircle

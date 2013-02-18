@@ -91,6 +91,7 @@
     
     if(!nullText)
     {
+        label.hidden = NO;
         [label setFrame:CGRectMake(CELL_CONTENT_MARGIN, CELL_CONTENT_MARGIN, width, textHeight)];
         [label setText:text];
     }
@@ -102,6 +103,7 @@
     
     if(viewWithImage && [imageView respondsToSelector:@selector(setImageWithURL:placeholderImage:)])
     {
+        imageView.hidden = NO;
         placeholderImageRect.origin.x += (CELL_CONTENT_WIDTH-placeholderImage.size.width)/2;
         //without text
         if(!nullText)
