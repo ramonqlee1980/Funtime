@@ -361,8 +361,8 @@
 		04976CD716BEA298003C6E58 /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04976CC416BEA298003C6E58 /* grayArrow@2x.png */; };
 		04976CD816BEA298003C6E58 /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 04976CC516BEA298003C6E58 /* whiteArrow.png */; };
 		04976CD916BEA298003C6E58 /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04976CC616BEA298003C6E58 /* whiteArrow@2x.png */; };
-		04976CDE16BEA68E003C6E58 /* QiushiImageLatestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04976CDC16BEA68E003C6E58 /* QiushiImageLatestController.m */; };
-		04976CDF16BEA68E003C6E58 /* QiushiImageLatestController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04976CDD16BEA68E003C6E58 /* QiushiImageLatestController.xib */; };
+		04976CDE16BEA68E003C6E58 /* TextImageSyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04976CDC16BEA68E003C6E58 /* TextImageSyncController.m */; };
+		04976CDF16BEA68E003C6E58 /* TextImageSyncController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04976CDD16BEA68E003C6E58 /* TextImageSyncController.xib */; };
 		04976CE216BEA7D8003C6E58 /* ImageWithTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04976CE116BEA7D8003C6E58 /* ImageWithTextCell.m */; };
 		04983D64168F2F3300F06C90 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 04983D56168F2F3300F06C90 /* GTMNSString+HTML.m */; };
 		04983D65168F2F3300F06C90 /* MWFeedInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 04983D58168F2F3300F06C90 /* MWFeedInfo.m */; };
@@ -1029,9 +1029,9 @@
 		04976CC416BEA298003C6E58 /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
 		04976CC516BEA298003C6E58 /* whiteArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrow.png; sourceTree = "<group>"; };
 		04976CC616BEA298003C6E58 /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
-		04976CDB16BEA68E003C6E58 /* QiushiImageLatestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiushiImageLatestController.h; sourceTree = "<group>"; };
-		04976CDC16BEA68E003C6E58 /* QiushiImageLatestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiushiImageLatestController.m; sourceTree = "<group>"; };
-		04976CDD16BEA68E003C6E58 /* QiushiImageLatestController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QiushiImageLatestController.xib; sourceTree = "<group>"; };
+		04976CDB16BEA68E003C6E58 /* TextImageSyncController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextImageSyncController.h; sourceTree = "<group>"; };
+		04976CDC16BEA68E003C6E58 /* TextImageSyncController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextImageSyncController.m; sourceTree = "<group>"; };
+		04976CDD16BEA68E003C6E58 /* TextImageSyncController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextImageSyncController.xib; sourceTree = "<group>"; };
 		04976CE016BEA7D7003C6E58 /* ImageWithTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageWithTextCell.h; sourceTree = "<group>"; };
 		04976CE116BEA7D8003C6E58 /* ImageWithTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageWithTextCell.m; sourceTree = "<group>"; };
 		04983D55168F2F3300F06C90 /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
@@ -2389,9 +2389,9 @@
 				049379D4169267E00049B1C2 /* HistoricalImageController.m */,
 				04E039BC16AEC18E0086A77F /* MainZakerViewController.h */,
 				04E039BD16AEC18E0086A77F /* MainZakerViewController.m */,
-				04976CDB16BEA68E003C6E58 /* QiushiImageLatestController.h */,
-				04976CDC16BEA68E003C6E58 /* QiushiImageLatestController.m */,
-				04976CDD16BEA68E003C6E58 /* QiushiImageLatestController.xib */,
+				04976CDB16BEA68E003C6E58 /* TextImageSyncController.h */,
+				04976CDC16BEA68E003C6E58 /* TextImageSyncController.m */,
+				04976CDD16BEA68E003C6E58 /* TextImageSyncController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -3121,7 +3121,7 @@
 				04976CD716BEA298003C6E58 /* grayArrow@2x.png in Resources */,
 				04976CD816BEA298003C6E58 /* whiteArrow.png in Resources */,
 				04976CD916BEA298003C6E58 /* whiteArrow@2x.png in Resources */,
-				04976CDF16BEA68E003C6E58 /* QiushiImageLatestController.xib in Resources */,
+				04976CDF16BEA68E003C6E58 /* TextImageSyncController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3349,7 +3349,7 @@
 				04976CCF16BEA298003C6E58 /* MessageInterceptor.m in Sources */,
 				04976CD016BEA298003C6E58 /* PullPsCollectionView.m in Sources */,
 				04976CD116BEA298003C6E58 /* PullTableView.m in Sources */,
-				04976CDE16BEA68E003C6E58 /* QiushiImageLatestController.m in Sources */,
+				04976CDE16BEA68E003C6E58 /* TextImageSyncController.m in Sources */,
 				04976CE216BEA7D8003C6E58 /* ImageWithTextCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

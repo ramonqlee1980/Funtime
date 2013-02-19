@@ -1,12 +1,12 @@
 //
-//  QiushiImageLatestController.m
+//  TextImageSyncController.m
 //  com.idreems.mrh
 //
 //  Created by ramonqlee on 2/3/13.
 //  Copyright (c) 2013 ramonqlee. All rights reserved.
 //
 
-#import "QiushiImageLatestController.h"
+#import "TextImageSyncController.h"
 #import "ImageWithTextCell.h"
 #import "Response.h"
 #import "FileModel.h"
@@ -15,12 +15,11 @@
 
 //url and related file name on local machine
 //url is pulled from server and others are derived from this url
-#define kTimelineJson @"http://www.idreems.com/php/embarrasepisode/embarrassing.php?type=image_latest&page=%d&count=20"
-#define kDataPath @"data"
-#define kDestinationName @"Timeline"
+#define kDefaultResouceUrl @"http://www.idreems.com/php/embarrasepisode/embarrassing.php?type=image_latest&page=%d&count=20"
+#define kDefaultResouceName @"Timeline"
 
 #define kRefreshFileName @"timelinejson"
-#define kLoadMoreFileName @"timelinejson"
+#define kLoadMoreFileName @"timelinejsonloadmore"
 
 
 #define kInitPage 1
@@ -30,14 +29,18 @@
 
 #define kWeiboTimelineResponseDataJson @"data"
 
-@interface QiushiImageLatestController ()
+@interface TextImageSyncController ()
 {
     NSUInteger mCurrentLoadMorePage;
+    FileModel* fileModel;
 }
+@property(nonatomic,retain)FileModel* fileModel;
 @end
 
-@implementation QiushiImageLatestController
+@implementation TextImageSyncController
 @synthesize fileModel;
+@synthesize resourceName;
+@synthesize resourceUrl;
 
 #pragma mark - PullTableViewDelegate
 
@@ -63,7 +66,10 @@
     [self notifyDataChanged];
     
     FileModel* model = [self fileModel];
-    model.fileURL = [NSString stringWithFormat:kTimelineJson,kInitPage];//for the latest page
+    if (!self.resourceUrl) {
+        self.resourceUrl = kDefaultResouceUrl;
+    }
+    model.fileURL = [NSString stringWithFormat:self.resourceUrl,kInitPage];//for the latest page
     model.notificationName = kTimelineJsonRefreshChanged;
     model.fileName = kRefreshFileName;
     
@@ -75,7 +81,10 @@
 {
     //more data
     FileModel* model = [self fileModel];
-    model.fileURL = [NSString stringWithFormat:kTimelineJson,(++mCurrentLoadMorePage)];
+    if (!self.resourceUrl) {
+        self.resourceUrl = kDefaultResouceUrl;
+    }
+    model.fileURL = [NSString stringWithFormat:self.resourceUrl,(++mCurrentLoadMorePage)];
     model.notificationName = kTimelineJsonLoadMoreChanged;
     model.fileName = kLoadMoreFileName;
     
@@ -95,7 +104,10 @@
     
 //    fileModel.fileURL = kTimelineJson;
     fileModel.fileName = kRefreshFileName;
-    fileModel.destPath = kDestinationName;
+    fileModel.destPath = kDefaultResouceName;
+    if (self.resourceName) {
+        fileModel.destPath = self.resourceName;
+    }
     fileModel.notificationName = kTimelineJsonRefreshChanged;
     
     return fileModel;
@@ -229,6 +241,8 @@
 -(void)dealloc
 {
     self.fileModel = nil;
+    self.resourceName = nil;
+    self.resourceUrl = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super dealloc];
 }

@@ -128,7 +128,7 @@
             case 0:
             {
                 p.itemDisplayName = @"有图糗事";
-                p.className = @"QiushiImageLatestController";
+                p.className = @"TextImageSyncController";
                 p.xibName = p.className;
             }
                 break;
