@@ -12,6 +12,7 @@
 #import "HistoricalImageController.h"
 #import "EmbarassViewController.h"
 #import "CommonHelper.h"
+#import "TextImageSyncController.h"
 
 #define kInitialItemCount 5
 
@@ -89,7 +90,12 @@
     {
         ctrl = (UIViewController*)[[NSClassFromString(p.className) alloc]init];
     }
-    
+    if([ctrl isKindOfClass:[TextImageSyncController class]])
+    {
+        TextImageSyncController* t = (TextImageSyncController*)ctrl;
+        t.resourceName = p.itemDisplayName;
+        t.resourceUrl = p.url;
+    }
     UINavigationController* navi = [[[UINavigationController alloc]initWithRootViewController:ctrl]autorelease];
     [self presentModalViewController:navi animated:YES];
 }
@@ -121,35 +127,79 @@
 -(NSArray*)getDefaultZakerItems
 {
     NSMutableArray*r = [[[NSMutableArray alloc]initWithCapacity:0]autorelease];
-    for (int i = 0; i<3; ++i) {
+    for (int i = 0; i<7; ++i) {
         GridItemProperty* p = [[GridItemProperty alloc]init];
         
         switch (i) {
             case 0:
             {
-                p.itemDisplayName = @"有图糗事";
+                p.itemDisplayName = @"糗图";                
+                p.url = @"http://www.idreems.com/php/embarrasepisode/embarrassing.php?type=image_latest&page=%d&count=20";
                 p.className = @"TextImageSyncController";
                 p.xibName = p.className;
             }
                 break;
             case 1:
             {
-                p.itemDisplayName = @"史上今日";
-                p.className = @"TextEventsController";
+                p.itemDisplayName = @"糗事大全";
+                p.url = @"http://www.idreems.com/php/embarrasepisode/embarrassing.php?type=hot_latest&page=%d&count=20";
+                p.className = @"TextImageSyncController";
                 p.xibName = p.className;
             }
                 break;
-//            case 2:
-//            {
-//                p.itemDisplayName = @"老照片";
-//                p.className = @"HistoricalImageController";
-//                p.xibName = nil;
-//            }
-//                break;
             case 2:
             {
-                p.itemDisplayName = @"糗事大全";
-                p.className = @"EmbarassViewController";
+                p.itemDisplayName = @"搞笑段子";
+                p.url = @"http://www.idreems.com/php/embarrasepisode/implicitessays_top.php?type=joke&count=20&page=%d";
+                p.className = @"TextImageSyncController";
+                p.xibName = p.className;
+            }
+                break;
+            case 3:
+            {
+                p.itemDisplayName = @"搞笑动画";
+                p.url = @"http://www.idreems.com/php/embarrasepisode/implicitessays_top.php?type=gif&count=20&page=%d";
+                p.className = @"TextImageSyncController";
+                p.xibName = p.className;
+            }
+                break;
+            case 4:
+            {
+                p.itemDisplayName = @"搞笑萌图";
+                p.url = @"http://www.idreems.com/php/embarrasepisode/implicitessays_top.php?type=meng&count=20&page=%d";
+                p.className = @"TextImageSyncController";
+                p.xibName = p.className;
+            }
+                break;
+            case 5:
+            {
+                p.itemDisplayName = @"暴笑";
+                p.url = @"http://www.idreems.com/php/embarrasepisode/implicitessays_top.php?type=heavy&count=20&page=%d";
+                p.className = @"TextImageSyncController";
+                p.xibName = p.className;
+            }
+                break;
+            case 6:
+            {
+                p.itemDisplayName = @"搞笑漫画";
+                p.url = @"http://www.idreems.com/php/embarrasepisode/implicitessays_top.php?type=comic&count=20&page=%d";
+                p.className = @"TextImageSyncController";
+                p.xibName = p.className;
+            }
+                break;
+            case 7:
+            {
+                p.itemDisplayName = @"抱走漫画热门";
+                p.url = @"http://www.idreems.com/php/embarrasepisode/comic_bz.php?type=hot&page=%d&count=20";
+                p.className = @"TextImageSyncController";
+                p.xibName = p.className;
+            }
+                break;
+            case 8:
+            {
+                p.itemDisplayName = @"抱走漫画最新";
+                p.url = @"http://www.idreems.com/php/embarrasepisode/comic_bz.php?type=latest&page=%d&count=20";
+                p.className = @"TextImageSyncController";
                 p.xibName = p.className;
             }
                 break;
