@@ -12,6 +12,7 @@
 #import "FileModel.h"
 #import "CommonHelper.h"
 #import "AppDelegate.h"
+#import "ZJTStatusBarAlertWindow.h"
 
 //url and related file name on local machine
 //url is pulled from server and others are derived from this url
@@ -63,7 +64,10 @@
     NSString* fileDir = [self cacheFile];
     [self.items removeAllObjects];
     [self.items addObjectsFromArray:[self loadContent:fileDir]];
-    [self notifyDataChanged];
+    if([self.items count])
+    {
+        [self notifyDataChanged];
+    }
     
     FileModel* model = [self fileModel];
     if (!self.resourceUrl) {
@@ -179,6 +183,7 @@
         else if([notification.object isKindOfClass:[NSError class]])//error
         {
             //fail to load data
+            [[ZJTStatusBarAlertWindow getInstance]showWithString:NSLocalizedString(@"LoadError", @"")];
             [self notifyDataChanged];
         }
     }
@@ -220,7 +225,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Back", @"Back") style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     self.navigationItem.rightBarButtonItem = backButton;
     [backButton release];
     

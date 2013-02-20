@@ -17,6 +17,7 @@
 "kRecommendList"="推荐";
 "kFun"="糗事";
 
+"LoadError" = "获取数据失败，请检查网络并稍后重试！";
 "share2WixinChat"="分享微信好友";
 "share2WixinFriends"="分享微信朋友圈";
 "add2FavTip"="收藏";

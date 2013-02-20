@@ -113,11 +113,11 @@
 
 - (void)setPullTableIsRefreshing:(BOOL)isRefreshing
 {
-    if(!pullTableIsRefreshing && isRefreshing) {
+    if(/*!pullTableIsRefreshing &&*/ isRefreshing) {
         // If not allready refreshing start refreshing
         [refreshView startAnimatingWithScrollView:self];
         pullTableIsRefreshing = YES;
-    } else if(pullTableIsRefreshing && !isRefreshing) {
+    } else if(/*pullTableIsRefreshing &&*/ !isRefreshing) {
         [refreshView egoRefreshScrollViewDataSourceDidFinishedLoading:self];
         pullTableIsRefreshing = NO;
     }
