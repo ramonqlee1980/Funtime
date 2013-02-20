@@ -9,6 +9,7 @@
 #import "ImageWithTextCell.h"
 #import "Response.h"
 #import "ImageBrowser.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define FONT_SIZE 14.0f
 
@@ -19,12 +20,13 @@
 @synthesize response;
 @synthesize label;
 @synthesize imageView;
+@synthesize separatorLine;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        // Initialization code        
     }
     return self;
 }
@@ -49,6 +51,7 @@
     UIView* cell = self;
     UIImage* placeholderImage = [UIImage imageNamed:kPlaceholderImage];
     CGRect placeholderImageRect = CGRectMake(0, 0, placeholderImage.size.width, placeholderImage.size.height);
+    
     if(nil==label)
     {
         label = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -58,6 +61,21 @@
         [label setFont:[UIFont systemFontOfSize:FONT_SIZE]];
         [cell addSubview:label];
     }
+    if(nil == separatorLine)
+    {
+        UIColor* color = [UIColor magentaColor];
+        separatorLine = [[UILabel alloc] initWithFrame:CGRectMake(-10, 0, kDeviceWidth, 1)];
+        [separatorLine setBackgroundColor:color];
+//        separatorLine.layer.borderWidth = 2;
+        //separatorLine.layer.borderColor = [[UIColor grayColor]CGColor];
+        separatorLine.layer.shadowColor = color.CGColor;
+        separatorLine.layer.shadowOpacity = 1.0;
+        separatorLine.layer.shadowRadius = 2;
+        separatorLine.layer.shadowOffset = CGSizeMake(0, 1);
+        separatorLine.clipsToBounds = NO;
+        [cell addSubview:separatorLine];
+    }
+        
     
     if(nil==imageView)
     {
@@ -131,6 +149,9 @@
 -(void)dealloc
 {
     self.response = nil;
+    self.separatorLine = nil;
+    self.imageView = nil;
+    self.label = nil;
     [super dealloc];
 }
 #pragma mark util

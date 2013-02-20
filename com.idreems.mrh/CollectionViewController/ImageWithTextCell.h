@@ -12,11 +12,13 @@
 {
     Response* response;
     UILabel* label;
+    UILabel* separatorLine;
     UIImageView* imageView;
 }
 @property(nonatomic,retain)Response* response;
 @property(nonatomic,assign)UILabel* label;
 @property(nonatomic,assign)UIImageView* imageView;
+@property(nonatomic,assign)UILabel* separatorLine;
 
 +(CGSize)measureCell:(Response*)status width:(CGFloat)width;
 @end

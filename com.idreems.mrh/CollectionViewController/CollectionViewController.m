@@ -121,6 +121,10 @@
     v.frame = rc;
     v.response = item;
     
+    //hide head line
+    v.separatorLine.hidden = (0==index);
+        
+    
     return v;
 }
 
