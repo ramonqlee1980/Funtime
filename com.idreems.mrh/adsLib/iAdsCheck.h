@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface iAdsCheck : NSObject
-
+{
+    UIViewController* _viewController;
+}
+@property (nonatomic, assign) UIViewController* viewController;
 + (iAdsCheck *)sharedInstance;
 -(void)start:(NSObject*)delegate;
 @end

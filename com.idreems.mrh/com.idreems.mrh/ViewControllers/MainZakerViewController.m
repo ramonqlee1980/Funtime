@@ -13,6 +13,8 @@
 #import "EmbarassViewController.h"
 #import "CommonHelper.h"
 #import "TextImageSyncController.h"
+#import "iAdsCheck.h"
+#import "AppDelegate.h"
 
 #define kInitialItemCount 5
 
@@ -38,6 +40,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    iAdsCheck* adsCheck = [iAdsCheck sharedInstance];
+    adsCheck.viewController = self;
+    [adsCheck start:APPDELEGATE];
     
     // Do any additional setup after loading the view.
     //TODO::load archived objects
