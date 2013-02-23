@@ -232,4 +232,22 @@
     }
     return encoding;
 }
+// 比较oldVersion和newVersion，如果oldVersion比newVersion旧，则返回YES，否则NO
+// Version format[X.X.X]
++(BOOL)CompareVersionFromOldVersion : (NSString *)oldVersion
+                         newVersion : (NSString *)newVersion
+{
+    NSArray*oldV = [oldVersion componentsSeparatedByString:@"."];
+    NSArray*newV = [newVersion componentsSeparatedByString:@"."];
+    NSUInteger len = MAX(oldV.count,newV.count);
+    
+    for (NSInteger i = 0; i < len; i++) {
+        NSInteger old = (i<oldV.count)?[(NSString *)[oldV objectAtIndex:i] integerValue]:0;
+        NSInteger new = (i<newV.count)?[(NSString *)[newV objectAtIndex:i] integerValue]:0;
+        if (old != new) {
+            return (new>old);
+        }
+    }
+    return NO;
+}
 @end

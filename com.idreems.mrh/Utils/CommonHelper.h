@@ -42,4 +42,7 @@
 +(void)extractFile:(NSString*)srcFile toFile:(NSString*)desFilePath fileType:(NSString*)fileType;
 
 +(NSStringEncoding)dataEncoding:(const Byte*) header;
+
++(BOOL)CompareVersionFromOldVersion : (NSString *)oldVersion
+                         newVersion : (NSString *)newVersion;
 @end

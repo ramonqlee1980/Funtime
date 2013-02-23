@@ -316,6 +316,8 @@
 		0493CFD5168FDD7F00B2DA2F /* WaterFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0493CFCB168FDD7F00B2DA2F /* WaterFlowView.m */; };
 		0493CFD6168FDD7F00B2DA2F /* WaterFlowViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0493CFCD168FDD7F00B2DA2F /* WaterFlowViewCell.m */; };
 		0493CFDA168FDD9800B2DA2F /* WaterFlowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0493CFD9168FDD9800B2DA2F /* WaterFlowController.m */; };
+		0494911216D8A67800B57AB6 /* iVersion.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0494910F16D8A67800B57AB6 /* iVersion.bundle */; };
+		0494911316D8A67800B57AB6 /* iVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494911116D8A67800B57AB6 /* iVersion.m */; };
 		0494BF8B1693DD4E00890784 /* PopupTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494BF881693DD4E00890784 /* PopupTableView.m */; };
 		0494BF8C1693DD4E00890784 /* PopupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494BF8A1693DD4E00890784 /* PopupTableViewCell.m */; };
 		0494BF9B1693DE4F00890784 /* deviant-art.png in Resources */ = {isa = PBXBuildFile; fileRef = 0494BF8E1693DE4F00890784 /* deviant-art.png */; };
@@ -967,6 +969,9 @@
 		0493CFCD168FDD7F00B2DA2F /* WaterFlowViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterFlowViewCell.m; sourceTree = "<group>"; };
 		0493CFD8168FDD9800B2DA2F /* WaterFlowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterFlowController.h; sourceTree = "<group>"; };
 		0493CFD9168FDD9800B2DA2F /* WaterFlowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterFlowController.m; sourceTree = "<group>"; };
+		0494910F16D8A67800B57AB6 /* iVersion.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iVersion.bundle; sourceTree = "<group>"; };
+		0494911016D8A67800B57AB6 /* iVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iVersion.h; sourceTree = "<group>"; };
+		0494911116D8A67800B57AB6 /* iVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iVersion.m; sourceTree = "<group>"; };
 		0494BF871693DD4E00890784 /* PopupTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupTableView.h; sourceTree = "<group>"; };
 		0494BF881693DD4E00890784 /* PopupTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupTableView.m; sourceTree = "<group>"; };
 		0494BF891693DD4E00890784 /* PopupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupTableViewCell.h; sourceTree = "<group>"; };
@@ -2190,6 +2195,16 @@
 			path = WaterFlowLib;
 			sourceTree = "<group>";
 		};
+		0494910E16D8A67800B57AB6 /* iVersion */ = {
+			isa = PBXGroup;
+			children = (
+				0494910F16D8A67800B57AB6 /* iVersion.bundle */,
+				0494911016D8A67800B57AB6 /* iVersion.h */,
+				0494911116D8A67800B57AB6 /* iVersion.m */,
+			);
+			path = iVersion;
+			sourceTree = "<group>";
+		};
 		0494BF861693DD4E00890784 /* PopupTableview */ = {
 			isa = PBXGroup;
 			children = (
@@ -2399,6 +2414,7 @@
 		049A4520168FB75700EC49BA /* ExternalLib */ = {
 			isa = PBXGroup;
 			children = (
+				0494910E16D8A67800B57AB6 /* iVersion */,
 				04976CA716BEA298003C6E58 /* CollectionViewController */,
 				04976CB216BEA298003C6E58 /* EGOTableViewPullRefresh */,
 				04E039CC16B0CC090086A77F /* StatusBarAlertWindow */,
@@ -3122,6 +3138,7 @@
 				04976CD816BEA298003C6E58 /* whiteArrow.png in Resources */,
 				04976CD916BEA298003C6E58 /* whiteArrow@2x.png in Resources */,
 				04976CDF16BEA68E003C6E58 /* TextImageSyncController.xib in Resources */,
+				0494911216D8A67800B57AB6 /* iVersion.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3351,6 +3368,7 @@
 				04976CD116BEA298003C6E58 /* PullTableView.m in Sources */,
 				04976CDE16BEA68E003C6E58 /* TextImageSyncController.m in Sources */,
 				04976CE216BEA7D8003C6E58 /* ImageWithTextCell.m in Sources */,
+				0494911316D8A67800B57AB6 /* iVersion.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

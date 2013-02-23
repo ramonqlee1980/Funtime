@@ -114,6 +114,10 @@
     
     [self.window makeKeyAndVisible];
     
+//    [self startAdsConfigReceive];
+    //flurry
+    [Flurry startSession:kFlurryID];
+    
     return YES;
 }
 
@@ -159,6 +163,7 @@
  */
 - (void)dealloc
 {
+    [mTrackViewUrl release];
     [_window release];
     [_tabBarController release];
     [downinglist release];
@@ -536,4 +541,6 @@
     [alert show];
     [alert release];
 }
+
+
 @end
