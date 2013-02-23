@@ -318,6 +318,8 @@
 		0493CFDA168FDD9800B2DA2F /* WaterFlowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0493CFD9168FDD9800B2DA2F /* WaterFlowController.m */; };
 		0494911216D8A67800B57AB6 /* iVersion.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0494910F16D8A67800B57AB6 /* iVersion.bundle */; };
 		0494911316D8A67800B57AB6 /* iVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494911116D8A67800B57AB6 /* iVersion.m */; };
+		0494911C16D8B20B00B57AB6 /* iOfferwall.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494911B16D8B20B00B57AB6 /* iOfferwall.m */; };
+		0494912016D8BA6300B57AB6 /* iAdsCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494911F16D8BA6300B57AB6 /* iAdsCheck.m */; };
 		0494BF8B1693DD4E00890784 /* PopupTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494BF881693DD4E00890784 /* PopupTableView.m */; };
 		0494BF8C1693DD4E00890784 /* PopupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494BF8A1693DD4E00890784 /* PopupTableViewCell.m */; };
 		0494BF9B1693DE4F00890784 /* deviant-art.png in Resources */ = {isa = PBXBuildFile; fileRef = 0494BF8E1693DE4F00890784 /* deviant-art.png */; };
@@ -972,6 +974,10 @@
 		0494910F16D8A67800B57AB6 /* iVersion.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iVersion.bundle; sourceTree = "<group>"; };
 		0494911016D8A67800B57AB6 /* iVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iVersion.h; sourceTree = "<group>"; };
 		0494911116D8A67800B57AB6 /* iVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iVersion.m; sourceTree = "<group>"; };
+		0494911B16D8B20B00B57AB6 /* iOfferwall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOfferwall.m; sourceTree = "<group>"; };
+		0494911D16D8B35100B57AB6 /* iOfferwall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOfferwall.h; sourceTree = "<group>"; };
+		0494911E16D8BA6300B57AB6 /* iAdsCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iAdsCheck.h; sourceTree = "<group>"; };
+		0494911F16D8BA6300B57AB6 /* iAdsCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iAdsCheck.m; sourceTree = "<group>"; };
 		0494BF871693DD4E00890784 /* PopupTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupTableView.h; sourceTree = "<group>"; };
 		0494BF881693DD4E00890784 /* PopupTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupTableView.m; sourceTree = "<group>"; };
 		0494BF891693DD4E00890784 /* PopupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupTableViewCell.h; sourceTree = "<group>"; };
@@ -1371,6 +1377,8 @@
 				043608671697903D0046440C /* Flurry_iPhone_SDK_v4.0.0 */,
 				043608741697903D0046440C /* GoogleAdMobAdsSDK */,
 				043608871697903D0046440C /* mobisage */,
+				0494911E16D8BA6300B57AB6 /* iAdsCheck.h */,
+				0494911F16D8BA6300B57AB6 /* iAdsCheck.m */,
 			);
 			path = adsLib;
 			sourceTree = "<group>";
@@ -2205,6 +2213,15 @@
 			path = iVersion;
 			sourceTree = "<group>";
 		};
+		0494911916D8B1E100B57AB6 /* Offerwall */ = {
+			isa = PBXGroup;
+			children = (
+				0494911D16D8B35100B57AB6 /* iOfferwall.h */,
+				0494911B16D8B20B00B57AB6 /* iOfferwall.m */,
+			);
+			path = Offerwall;
+			sourceTree = "<group>";
+		};
 		0494BF861693DD4E00890784 /* PopupTableview */ = {
 			isa = PBXGroup;
 			children = (
@@ -2414,6 +2431,8 @@
 		049A4520168FB75700EC49BA /* ExternalLib */ = {
 			isa = PBXGroup;
 			children = (
+				043608661697903D0046440C /* adsLib */,
+				0494911916D8B1E100B57AB6 /* Offerwall */,
 				0494910E16D8A67800B57AB6 /* iVersion */,
 				04976CA716BEA298003C6E58 /* CollectionViewController */,
 				04976CB216BEA298003C6E58 /* EGOTableViewPullRefresh */,
@@ -2430,7 +2449,6 @@
 				04360A2916979A020046440C /* iRate */,
 				04360A00169791C20046440C /* XPathQuery */,
 				043609FA1697915D0046440C /* SNS */,
-				043608661697903D0046440C /* adsLib */,
 				0428AE191696ACD600170BF2 /* MDCParallaxView */,
 				0428ADFD1696616600170BF2 /* InfiniTabBar */,
 				0494BF861693DD4E00890784 /* PopupTableview */,
@@ -3369,6 +3387,8 @@
 				04976CDE16BEA68E003C6E58 /* TextImageSyncController.m in Sources */,
 				04976CE216BEA7D8003C6E58 /* ImageWithTextCell.m in Sources */,
 				0494911316D8A67800B57AB6 /* iVersion.m in Sources */,
+				0494911C16D8B20B00B57AB6 /* iOfferwall.m in Sources */,
+				0494912016D8BA6300B57AB6 /* iAdsCheck.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

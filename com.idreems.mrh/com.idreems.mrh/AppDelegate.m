@@ -16,6 +16,7 @@
 #import "Flurry.h"
 #import "AboutViewController.h"
 #import "iRate.h"
+#import "iAdsCheck.h"
 
 #if 0
 #import "FirstViewController.h"
@@ -114,7 +115,7 @@
     
     [self.window makeKeyAndVisible];
     
-//    [self startAdsConfigReceive];
+    [[iAdsCheck sharedInstance]start:self];
     //flurry
     [Flurry startSession:kFlurryID];
     
@@ -163,7 +164,6 @@
  */
 - (void)dealloc
 {
-    [mTrackViewUrl release];
     [_window release];
     [_tabBarController release];
     [downinglist release];
@@ -541,6 +541,5 @@
     [alert show];
     [alert release];
 }
-
 
 @end

@@ -250,4 +250,44 @@
     }
     return NO;
 }
+
+#pragma multiple params
++(id)performSelector:(NSObject*)obj selector:(SEL)selector withObject:(id)p1 withObject:(id)p2 withObject:(id)p3
+{
+    
+    NSMethodSignature *sig = [obj methodSignatureForSelector:selector];
+    
+    if (sig)
+    {
+        NSInvocation* invo = [NSInvocation invocationWithMethodSignature:sig];
+        
+        [invo setTarget:obj];
+        
+        [invo setSelector:selector];
+        
+        [invo setArgument:&p1 atIndex:2];
+        
+        [invo setArgument:&p2 atIndex:3];
+        
+        [invo setArgument:&p3 atIndex:4];
+        
+        
+        [invo invoke];
+        
+        if (sig.methodReturnLength) {
+            
+            id anObject;
+            
+            [invo getReturnValue:&anObject];
+            
+            return anObject;
+        }
+        else {
+            return nil;
+        }
+    }
+    else {
+        return nil;
+    }
+}
 @end

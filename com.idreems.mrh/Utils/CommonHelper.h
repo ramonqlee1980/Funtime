@@ -45,4 +45,5 @@
 
 +(BOOL)CompareVersionFromOldVersion : (NSString *)oldVersion
                          newVersion : (NSString *)newVersion;
++(id)performSelector:(NSObject*)obj selector:(SEL)selector withObject:(id)p1 withObject:(id)p2 withObject:(id)p3;
 @end

@@ -13,13 +13,14 @@
 
 //ads url
 #define kDefaultAds @"defaultAds"
+#define kDefaultAdsDir @"adsConfig"
 
 #ifdef k91Appstore
 #define AdsUrl @"http://www.idreems.com/example.php?adsconfigNonAppstore.xml"
 #else
 #define AdsUrl @"http://www.idreems.com/example.php?adsconfig20.xml"
 #endif
-
+#define kAdsConfigNotification @"kAdsConfigNotification"
 
 #define kWixinChatID @"wx906a8a63865c9a7f"
 #define kFlurryID @"D5WYXYC4R9C6273W7M9Q"

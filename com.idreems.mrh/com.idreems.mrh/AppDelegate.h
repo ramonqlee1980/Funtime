@@ -15,12 +15,8 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate,WXApiDelegate>
 {
     NSOperationQueue* mOperationQueue;
-    NSString* mTrackViewUrl;
-    NSString* mTrackName;
 }
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic, retain) NSString* mTrackViewUrl;
-@property (nonatomic, retain) NSString* mTrackName;
 
 @property (strong, nonatomic) UITabBarController *tabBarController;
 @property(nonatomic,retain)NSMutableArray *finishedlist;//已下载完成的文件列表（文件对象）
