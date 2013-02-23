@@ -16,7 +16,6 @@
 #import "Flurry.h"
 #import "AboutViewController.h"
 #import "iRate.h"
-#import "iAdsCheck.h"
 
 #if 0
 #import "FirstViewController.h"
@@ -114,8 +113,7 @@
     [zakerCtrl release];
     
     [self.window makeKeyAndVisible];
-    
-    [[iAdsCheck sharedInstance]start:self];
+        
     //flurry
     [Flurry startSession:kFlurryID];
     
@@ -343,21 +341,7 @@
     if (!fileModel.destPath) {
         fileModel.destPath = name;
     }
-    //ads file??
-//    if ([AppDelegate AdsFileDownloadRequest:fileModel]) {
-//        [AdsConfig reset];
-//        AdsConfig *config = [AdsConfig sharedAdsConfig];
-//        [config init:fileName];
-//        //show close ads
-//        if([config wallShouldShow])
-//        {
-//            mAdsWalls = [config getAdsWalls];
-//            //notify observers
-//            if(![AppDelegate isPurchased])
-//                [[NSNotificationCenter defaultCenter]postNotificationName:kAdsUpdateDidFinishLoading object:nil];
-//        }
-//        return;
-//    }
+    
     //unzip(zip,rar,txt)
     NSString* desFilePath = [CommonHelper getTargetBookPath:fileModel.destPath];
     [CommonHelper extractFile:fileName toFile:[CommonHelper getTargetBookPath:fileModel.destPath] fileType:fileModel.fileType];

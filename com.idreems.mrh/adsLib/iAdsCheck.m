@@ -9,10 +9,11 @@
 #import "iAdsCheck.h"
 #import "FileModel.h"
 #import "AdsConfig.h"
-#import "iOfferwall.h"
+#import "iOfferwallManager.h"
 #import "CommonHelper.h"
 
 @implementation iAdsCheck
+@synthesize viewController=_viewController;
 + (iAdsCheck *)sharedInstance
 {
     static iAdsCheck *sharedInstance = nil;
@@ -42,15 +43,8 @@
     {
         if([notification.object isKindOfClass:[NSString class]])
         {
-            NSString* fileName = (NSString*)notification.object;
-            //load ads config
-            [AdsConfig reset];
-            AdsConfig* config = [AdsConfig sharedAdsConfig];
-            [config init:fileName];
-            if([config wallShouldShow])
-            {
-                [[iOfferwall sharedInstance]open:[config getAdsWalls]];
-            }
+            [self performSelector:@selector(performOnMainThread:) onThread:[NSThread mainThread] withObject:notification waitUntilDone:YES];            
+            
         }
         else if([notification.object isKindOfClass:[NSError class]])//error
         {
@@ -58,5 +52,19 @@
     }
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kAdsConfigNotification object:nil];
+}
+-(void)performOnMainThread:(NSNotification*)notification
+{
+    NSString* fileName = (NSString*)notification.object;
+    //load ads config
+    [AdsConfig reset];
+    AdsConfig* config = [AdsConfig sharedAdsConfig];
+    [config init:fileName];
+    if([config wallShouldShow])
+    {
+        iOfferwallManager* mgr = [iOfferwallManager sharedInstance];
+        mgr.viewController = self.viewController;
+        [mgr open:[config getAdsWalls]];
+    }
 }
 @end
