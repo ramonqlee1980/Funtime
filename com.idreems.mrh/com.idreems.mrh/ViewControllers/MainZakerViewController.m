@@ -133,7 +133,7 @@
 -(NSArray*)getDefaultZakerItems
 {
     NSMutableArray*r = [[[NSMutableArray alloc]initWithCapacity:0]autorelease];
-    for (int i = 0; i<7; ++i) {
+    for (int i = 0; i<6; ++i) {
         GridItemProperty* p = [[GridItemProperty alloc]init];
         
         switch (i) {

@@ -23,14 +23,14 @@
 #define kAdsConfigNotification @"kAdsConfigNotification"
 
 #define kWixinChatID @"wx906a8a63865c9a7f"
-#define kFlurryID @"D5WYXYC4R9C6273W7M9Q"
+#define kFlurryID @"KQ28Y7RVCHBJC9YKT4Q8"//replaced
 //weibo key and secret
 //sina weibo
 #define kOAuthConsumerKey				@"319938111"		//REPLACE ME
 #define kOAuthConsumerSecret			@"1618d139b2ea94d0ddb5ef931245265a"		//REPLACE ME
 
 //appid
-#define kAppIdOnAppstore @"471656942"
+#define kAppIdOnAppstore @"287edfff80"
 
 //wall
 //修改为你自己的AppID和AppSecret
@@ -39,7 +39,7 @@
 
 
 //id for ads
-#define kMobiSageID_iPhone  @"e270159b22cc4c98a64e4402db48e96d"
+#define kMobiSageID_iPhone  @"344fb5ae1f714dfda4b06d3df200da6a"//replaced
 #define kMobiSageIDOther_iPhone  @"242f601007b249fa8a2577890e80e217"
 #define kAdmobID @"a14f1b56e4ba533"
 

@@ -83,7 +83,8 @@
         imageView.userInteractionEnabled = YES;
         if([imageView respondsToSelector:@selector(setImageWithURL:placeholderImage:)])
         {
-            [imageView setImageWithURL:[NSURL URLWithString:status.thumbnailUrl] placeholderImage:placeholderImage];
+            [imageView performSelector:@selector(setImageWithURL:placeholderImage:) withObject:[NSURL URLWithString:status.thumbnailUrl] withObject:placeholderImage];
+//            [imageView setImageWithURL:[NSURL URLWithString:status.thumbnailUrl] placeholderImage:placeholderImage];
         }
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.bounds = placeholderImageRect;
@@ -126,7 +127,8 @@
         //without text
         if(!nullText)
         {
-            [imageView setImageWithURL:[NSURL URLWithString:status.thumbnailUrl] placeholderImage:placeholderImage];
+            [imageView performSelector:@selector(setImageWithURL:placeholderImage:) withObject:[NSURL URLWithString:status.thumbnailUrl] withObject:placeholderImage];
+//            [imageView setImageWithURL:[NSURL URLWithString:status.thumbnailUrl] placeholderImage:placeholderImage];
             
             placeholderImageRect.origin.y += (CELL_CONTENT_MARGIN+textHeight+CELL_CONTENT_MARGIN);
         }
