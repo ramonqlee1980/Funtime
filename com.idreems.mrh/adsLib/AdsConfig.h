@@ -22,7 +22,7 @@
 #endif
 #define kAdsConfigNotification @"kAdsConfigNotification"
 
-#define kWixinChatID @"wx906a8a63865c9a7f"
+#define kWixinChatID @"wxdc2aaf94a5470e5d"//replaced
 #define kFlurryID @"KQ28Y7RVCHBJC9YKT4Q8"//replaced
 //weibo key and secret
 //sina weibo

@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WXApi.h"
 @class FileModel;
 
 #define APPDELEGATE    (AppDelegate*)[[UIApplication sharedApplication]delegate]
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate,WXApiDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 {
     NSOperationQueue* mOperationQueue;
 }

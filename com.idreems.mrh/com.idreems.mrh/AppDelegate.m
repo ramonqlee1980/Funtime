@@ -11,27 +11,12 @@
 #import "FileModel.h"
 #import "CommonHelper.h"
 #import "ViewController.h"
-#import "WXApi.h"
-#import "AdsConfig.h"
 #import "Flurry.h"
 #import "AboutViewController.h"
 #import "iRate.h"
-
-#if 0
-#import "FirstViewController.h"
-#import "EmbarassViewController.h"
-#import "TextEventsController.h"
-#import "HistoricalImageController.h"
-#endif
+#import "AdsConfig.h"
 
 #import "MainZakerViewController.h"
-
-@interface AppDelegate()
-{
-    NSUInteger mDialogType;
-}
-- (void) sendAppContent:(NSString*)title description:(NSString*)description image:(NSString*)name scene:(int)scene;
-@end
 
 
 #define kMaxConcurrentOperationCount 1
@@ -105,8 +90,7 @@
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
-    //向微信注册
-    [WXApi registerApp:kWixinChatID];
+
 
     UIViewController* zakerCtrl = [[MainZakerViewController alloc]init];
     self.window.rootViewController = zakerCtrl;
@@ -352,178 +336,6 @@
     {
         [[NSNotificationCenter defaultCenter]postNotificationName:fileModel.notificationName object:[desFilePath stringByAppendingPathComponent:fileModel.fileName]];
     }
-}
-
-#pragma mark alertView delegate
-- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-    if (mDialogType==kUpdateApp) {
-        // the user clicked one of the OK/Cancel buttons
-        if (buttonIndex == 1)
-        {
-            //TODO:temp delete
-            //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:mTrackViewUrl]];
-        }
-    }
-    else if(mDialogType == kOpenWeixin)
-    {
-#define kOkIndex 0
-        if(buttonIndex == kOkIndex)
-        {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[WXApi getWXAppInstallUrl]]];
-            [Flurry logEvent:kFlurryConfirmOpenWeixinInAppstore];
-        }
-        else
-        {
-            [Flurry logEvent:kFlurryCancelOpenWeixinInAppstore];
-        }
-    }
-}
-#pragma mark openURL
-
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
-    return  [WXApi handleOpenURL:url delegate:self];
-}
-
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
-    return  [WXApi handleOpenURL:url delegate:self];
-}
-
-#pragma mark WXApiDelegate
-/*! @brief 收到一个来自微信的请求，处理完后调用sendResp
- *
- * 收到一个来自微信的请求，异步处理完成后必须调用sendResp发送处理结果给微信。
- * 可能收到的请求有GetMessageFromWXReq、ShowMessageFromWXReq等。
- * @param req 具体请求内容，是自动释放的
- */
--(void) onReq:(BaseReq*)req
-{
-    if([req isKindOfClass:[GetMessageFromWXReq class]])
-    {
-        //[self onRequestAppMessage];
-        NSString *strTitle = [NSString stringWithFormat:@"消息来自微信"];
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strTitle delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-        [alert release];
-    }
-    else if([req isKindOfClass:[ShowMessageFromWXReq class]])
-    {
-        ShowMessageFromWXReq* temp = (ShowMessageFromWXReq*)req;
-        [self onShowMediaMessage:temp.message];
-    }
-    
-}
-
-/*! @brief 发送一个sendReq后，收到微信的回应
- *
- * 收到一个来自微信的处理结果。调用一次sendReq后会收到onResp。
- * 可能收到的处理结果有SendMessageToWXResp、SendAuthResp等。
- * @param resp具体的回应内容，是自动释放的
- */
--(void) onResp:(BaseResp*)resp
-{
-    if([resp isKindOfClass:[SendMessageToWXResp class]])
-    {
-        NSString *strTitle = [NSString stringWithFormat:@"发送提示"];
-        NSString *strMsg = [NSString stringWithFormat:@"发送成功"];
-        if (resp.errCode!=WXSuccess) {
-            strMsg = [resp errStr];
-        }
-        else
-        {
-            //if([AdsConfig isAdsOn])
-            {
-                strMsg = [strMsg stringByAppendingString:@"。恭喜：作为奖励，已经永久关闭广告。"];
-                [AdsConfig setAdsOn:NO type:kPermanent];
-            }
-        }
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-        [alert release];
-    }
-    else if([resp isKindOfClass:[SendAuthResp class]])
-    {
-        NSString *strTitle = [NSString stringWithFormat:@"Auth结果"];
-        //NSString *strMsg = [NSString stringWithFormat:@"Auth结果:%d", resp.errCode];
-        NSString *strMsg = [NSString stringWithFormat:@"Auth成功"];
-        if (resp.errCode!=WXSuccess) {
-            strMsg = [resp errStr];
-        }
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-        [alert release];
-    }
-}
-
-#pragma mark Weixin SendAppContent
-//scene:WXSceneSession;//WXSceneTimeline
-- (void) sendAppContent:(NSString*)title description:(NSString*)description image:(NSString*)name scene:(int)scene
-{
-    if (![WXApi isWXAppInstalled]) {
-        [self openWeixinInAppstore];
-        return;
-    }
-    // 发送内容给微信
-    WXMediaMessage *message = [WXMediaMessage message];
-    message.title = title;
-    message.description = description;
-    //    if(name && [name length]>0)
-    //    {
-    //        [message setThumbImage:[UIImage imageNamed:name]];
-    //    }
-    
-    WXAppExtendObject *ext = [WXAppExtendObject object];
-    
-    //TODO::temp delete
-    //ext.url = self.mTrackViewUrl;
-    
-    message.mediaObject = ext;
-    
-    SendMessageToWXReq* req = [[[SendMessageToWXReq alloc] init]autorelease];
-    req.bText = NO;
-    req.message = message;
-    req.scene = scene;
-    
-    [WXApi sendReq:req];
-    
-    [Flurry logEvent:kShareByWeixin];
-    
-    [AdsConfig setAdsOn:NO type:kPermanent];
-}
-
--(void)openWeixinInAppstore
-{
-    NSString* title = @"提示";
-    NSString* msg = @"您需要安装微信后，才能分享，现在去下载？";
-    NSString* okMsg =  NSLocalizedString(@"Ok", "");
-    NSString* cancelMsg =  NSLocalizedString(@"Cancel", "");
-    UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:title message:msg delegate:self cancelButtonTitle:okMsg otherButtonTitles:cancelMsg, nil]autorelease];
-    [alert show];
-    mDialogType = kOpenWeixin;
-}
-
-#pragma mark Weixin OnReq
--(void) onShowMediaMessage:(WXMediaMessage *) message
-{
-    // 微信启动， 有消息内容。
-    [self viewContent:message];
-}
-- (void) viewContent:(WXMediaMessage *) msg
-{
-    //显示微信传过来的内容
-    WXAppExtendObject *obj = msg.mediaObject;
-    
-    NSString *strTitle = [NSString stringWithFormat:@"消息来自微信"];
-    NSString *strMsg = [NSString stringWithFormat:@"标题：%@ \n内容：%@ \n附带信息：%@ \n缩略图:%u bytes\n\n", msg.title, msg.description, obj.extInfo, msg.thumbData.length];
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [alert show];
-    [alert release];
 }
 
 @end

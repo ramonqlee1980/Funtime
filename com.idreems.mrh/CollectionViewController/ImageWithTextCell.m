@@ -12,6 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #define FONT_SIZE 14.0f
+#define kHorizontalMargin 3.0f
 
 #define CELL_CONTENT_MARGIN 10.0f
 #define kPlaceholderImage @"loadingImage_50x118.png"
@@ -20,7 +21,8 @@
 @synthesize response;
 @synthesize label;
 @synthesize imageView;
-@synthesize separatorLine;
+@synthesize centerimageView;
+@synthesize footerView;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -52,6 +54,14 @@
     UIImage* placeholderImage = [UIImage imageNamed:kPlaceholderImage];
     CGRect placeholderImageRect = CGRectMake(0, 0, placeholderImage.size.width, placeholderImage.size.height);
     
+    CGRect backgroundRect = CGRectZero;
+    if(!centerimageView)
+    {    
+        UIImage *centerimage = [UIImage imageNamed:@"block_center_background.png"];
+        centerimageView = [[UIImageView alloc]initWithImage:centerimage];
+        [centerimageView setFrame:backgroundRect];
+        [self addSubview:centerimageView];
+    }
     if(nil==label)
     {
         label = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -59,23 +69,10 @@
         [label setMinimumFontSize:FONT_SIZE];
         [label setNumberOfLines:0];
         [label setFont:[UIFont systemFontOfSize:FONT_SIZE]];
+        [label setBackgroundColor:[UIColor clearColor]];
         [cell addSubview:label];
     }
-    if(nil == separatorLine)
-    {
-        UIColor* color = [UIColor magentaColor];
-        separatorLine = [[UILabel alloc] initWithFrame:CGRectMake(-10, 0, kDeviceWidth, 1)];
-        [separatorLine setBackgroundColor:color];
-//        separatorLine.layer.borderWidth = 2;
-        //separatorLine.layer.borderColor = [[UIColor grayColor]CGColor];
-        separatorLine.layer.shadowColor = color.CGColor;
-        separatorLine.layer.shadowOpacity = 1.0;
-        separatorLine.layer.shadowRadius = 2;
-        separatorLine.layer.shadowOffset = CGSizeMake(0, 1);
-        separatorLine.clipsToBounds = NO;
-        [cell addSubview:separatorLine];
-    }
-        
+       
     
     if(nil==imageView)
     {
@@ -84,7 +81,6 @@
         if([imageView respondsToSelector:@selector(setImageWithURL:placeholderImage:)])
         {
             [imageView performSelector:@selector(setImageWithURL:placeholderImage:) withObject:[NSURL URLWithString:status.thumbnailUrl] withObject:placeholderImage];
-//            [imageView setImageWithURL:[NSURL URLWithString:status.thumbnailUrl] placeholderImage:placeholderImage];
         }
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.bounds = placeholderImageRect;
@@ -95,6 +91,15 @@
         [imageView addGestureRecognizer:tap];
         
         [cell addSubview:imageView];
+    }
+    
+    CGRect footerViewRect = CGRectZero;
+    if(!footerView)
+    {
+    UIImage *footimage = [UIImage imageNamed:@"block_foot_background.png"];
+    footerView = [[UIImageView alloc]initWithImage:footimage];
+    [footerView setFrame:footerViewRect];
+    [self addSubview:footerView];
     }
    
     CGFloat CELL_CONTENT_WIDTH = self.frame.size.width;
@@ -111,8 +116,11 @@
     if(!nullText)
     {
         label.hidden = NO;
-        [label setFrame:CGRectMake(CELL_CONTENT_MARGIN, CELL_CONTENT_MARGIN, width, textHeight)];
-        [label setText:text];
+        CGRect rc = CGRectMake(CELL_CONTENT_MARGIN, CELL_CONTENT_MARGIN, width, textHeight);
+        [label setFrame:rc];
+        [label setText:text];        
+        backgroundRect.size.height = rc.size.height;
+        footerViewRect = rc;
     }
     else
     {
@@ -137,10 +145,22 @@
             placeholderImageRect.origin.y += CELL_CONTENT_MARGIN;
         }
         [imageView setFrame:placeholderImageRect];
+        footerViewRect = placeholderImageRect;
+        backgroundRect.size.height = placeholderImageRect.size.height;
     }else{
         [imageView setFrame:CGRectZero];
         imageView.hidden = YES;
     }
+    
+    footerViewRect.origin.x = 0;
+    footerViewRect.origin.y = footerViewRect.size.height+footerViewRect.origin.y;
+    footerViewRect.size.height = 15;
+    footerViewRect.size.width = kDeviceWidth - 2*kHorizontalMargin;
+    [footerView setFrame:footerViewRect];
+    
+    backgroundRect.size.width = footerViewRect.size.width;
+    backgroundRect.size.height = footerViewRect.origin.y;
+    [centerimageView setFrame:backgroundRect];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
@@ -151,9 +171,10 @@
 -(void)dealloc
 {
     self.response = nil;
-    self.separatorLine = nil;
     self.imageView = nil;
     self.label = nil;
+    self.centerimageView = nil;
+    self.footerView = nil;
     [super dealloc];
 }
 #pragma mark util

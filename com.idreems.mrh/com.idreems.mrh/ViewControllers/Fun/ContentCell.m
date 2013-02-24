@@ -209,13 +209,13 @@
         case FBAD:     //share to wixin chat
         {
             AppDelegate* delegate = APPDELEGATE;
-            [delegate sendAppContent:kWixinTitle description:content image:imgUrl scene:WXSceneSession];
+//            [delegate sendAppContent:kWixinTitle description:content image:imgUrl scene:WXSceneSession];
         }
             break;
         case FCOMMITE: //评论
         {
             AppDelegate* delegate = APPDELEGATE;
-            [delegate sendAppContent:kWixinTitle description:content image:imgUrl scene:WXSceneTimeline];
+//            [delegate sendAppContent:kWixinTitle description:content image:imgUrl scene:WXSceneTimeline];
         }
             break;
         default:

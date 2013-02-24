@@ -10,7 +10,6 @@
 #import "WeiboViewController.h"
 #import "TextEventsController.h"
 #import "HistoricalImageController.h"
-#import "EmbarassViewController.h"
 #import "CommonHelper.h"
 #import "TextImageSyncController.h"
 #import "iAdsCheck.h"

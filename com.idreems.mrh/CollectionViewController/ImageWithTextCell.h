@@ -11,14 +11,16 @@
 @interface ImageWithTextCell : PSCollectionViewCell
 {
     Response* response;
+    UIImageView* centerimageView;
     UILabel* label;
-    UILabel* separatorLine;
+    UIImageView* footerView;
     UIImageView* imageView;
 }
 @property(nonatomic,retain)Response* response;
+@property(nonatomic,assign)UIImageView* centerimageView;
 @property(nonatomic,assign)UILabel* label;
 @property(nonatomic,assign)UIImageView* imageView;
-@property(nonatomic,assign)UILabel* separatorLine;
+@property(nonatomic,assign)UIImageView* footerView;
 
 +(CGSize)measureCell:(Response*)status width:(CGFloat)width;
 @end
