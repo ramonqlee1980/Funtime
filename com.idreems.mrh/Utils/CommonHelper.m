@@ -10,6 +10,7 @@
 #import "ZipArchive.h"
 #import "Unrar4iOSEx.h"
 #import "AppDelegate.h"
+#import "AdsConfig.h"
 
 @implementation CommonHelper
 
@@ -325,5 +326,12 @@
 			NSAssert(NO, @"ShareKit: Could not find a root view controller.  You can assign one manually by calling [[SHK currentHelper] setRootViewController:YOURROOTVIEWCONTROLLER].");
 	}
     return result;    
+}
++(NSString*)appStoreUrl
+{
+    NSString *appName = [NSString stringWithString:[[[NSBundle mainBundle] infoDictionary]   objectForKey:@"CFBundleName"]];
+    NSString *appStoreURL = [NSString stringWithFormat:@"itms-apps://itunes.com/app/%@",[appName stringByReplacingOccurrencesOfString:@" " withString:@""]];
+    
+    return appStoreURL;
 }
 @end

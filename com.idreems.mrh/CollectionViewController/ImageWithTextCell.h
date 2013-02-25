@@ -15,12 +15,14 @@
     UILabel* label;
     UIImageView* footerView;
     UIImageView* imageView;
+    UIButton* shareButton;
 }
 @property(nonatomic,retain)Response* response;
 @property(nonatomic,assign)UIImageView* centerimageView;
 @property(nonatomic,assign)UILabel* label;
 @property(nonatomic,assign)UIImageView* imageView;
 @property(nonatomic,assign)UIImageView* footerView;
+@property(nonatomic,assign)UIButton* shareButton;
 
 +(CGSize)measureCell:(Response*)status width:(CGFloat)width;
 @end

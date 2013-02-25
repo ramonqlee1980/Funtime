@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @class FileModel;
 
 #define APPDELEGATE    (AppDelegate*)[[UIApplication sharedApplication]delegate]

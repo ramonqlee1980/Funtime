@@ -22,6 +22,7 @@
 #endif
 #define kAdsConfigNotification @"kAdsConfigNotification"
 
+#define kShareSDKAppId @"287edfff80"//to be replaced
 #define kWixinChatID @"wxdc2aaf94a5470e5d"//replaced
 #define kFlurryID @"KQ28Y7RVCHBJC9YKT4Q8"//replaced
 //weibo key and secret

@@ -17,7 +17,7 @@
 #import "AdsConfig.h"
 
 #import "MainZakerViewController.h"
-
+#import <ShareSDK/ShareSDK.h>
 
 #define kMaxConcurrentOperationCount 1
 
@@ -90,14 +90,14 @@
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
-
-
+    [ShareSDK registerApp:kShareSDKAppId];
+    
     UIViewController* zakerCtrl = [[MainZakerViewController alloc]init];
     self.window.rootViewController = zakerCtrl;
     [zakerCtrl release];
     
     [self.window makeKeyAndVisible];
-        
+    
     //flurry
     [Flurry startSession:kFlurryID];
     
@@ -205,8 +205,8 @@
     if (isBeginDown) {
         [request startAsynchronous];
     }
-
-//    [downinglist addObject:request];
+    
+    //    [downinglist addObject:request];
     
     [request release];
 }
@@ -302,13 +302,13 @@
         //add to operation queue
         NSInvocationOperation* operation = [[NSInvocationOperation alloc]initWithTarget:self selector:@selector(saveDownloadedResources:) object:fileInfo];
         [mOperationQueue addOperation:operation];
-        [operation release];        
+        [operation release];
         
         
         [finishedlist addObject:fileInfo];
         [downinglist removeObject:request];
         [downinglist removeObject:request];
-               
+        
     }
 }
 
@@ -337,5 +337,12 @@
         [[NSNotificationCenter defaultCenter]postNotificationName:fileModel.notificationName object:[desFilePath stringByAppendingPathComponent:fileModel.fileName]];
     }
 }
+#pragma ShareSDK delegate
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [ShareSDK handleOpenURL:url wxDelegate:self]; }
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    
+    return [ShareSDK handleOpenURL:url wxDelegate:self]; }
 
 @end
