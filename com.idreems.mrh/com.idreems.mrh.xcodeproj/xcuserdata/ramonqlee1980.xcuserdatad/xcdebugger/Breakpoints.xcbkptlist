@@ -7,52 +7,13 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "WeiboListView/TableCells/UITableViewCellResponse.m"
-         timestampString = "383092816.033818"
+         filePath = "SDWebImage/UIImageView+WebCache.m"
+         timestampString = "383701240.95708"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "44"
-         endingLineNumber = "44"
-         landmarkName = "-setResponse:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "WeiboListView/TableCells/UITableViewCellResponse.m"
-         timestampString = "383092865.753436"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "129"
-         endingLineNumber = "129"
-         landmarkName = "-ImageBtnClicked:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Offerwall/MobiSageRecommendDelegateImp.m"
-         timestampString = "383354945.316233"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "37"
-         endingLineNumber = "37"
-         landmarkName = "-MobiSageFailToOpenRecommendModalView"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Offerwall/iOfferwallManager.m"
-         timestampString = "383389684.330107"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "16"
-         endingLineNumber = "16"
-         landmarkName = "+sharedInstance"
+         startingLineNumber = "42"
+         endingLineNumber = "42"
+         landmarkName = "-webImageManager:didFinishWithImage:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

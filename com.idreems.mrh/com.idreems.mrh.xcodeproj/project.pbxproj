@@ -356,7 +356,7 @@
 		0495DCB6168E573000AC7985 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0495DCB5168E573000AC7985 /* Default.png */; };
 		0495DCB8168E573000AC7985 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0495DCB7168E573000AC7985 /* Default@2x.png */; };
 		0495DCBA168E573000AC7985 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0495DCB9168E573000AC7985 /* Default-568h@2x.png */; };
-		04964A3E16BE4890000B57EB /* Response.m in Sources */ = {isa = PBXBuildFile; fileRef = 04964A3D16BE4890000B57EB /* Response.m */; };
+		04964A3E16BE4890000B57EB /* ResponseJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 04964A3D16BE4890000B57EB /* ResponseJson.m */; };
 		04964A4C16BE832F000B57EB /* UITableViewCellResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 04964A4B16BE832F000B57EB /* UITableViewCellResponse.m */; };
 		0496786016D9722B002B95E8 /* MobiSageRecommendDelegateImp.m in Sources */ = {isa = PBXBuildFile; fileRef = 0496785F16D9722B002B95E8 /* MobiSageRecommendDelegateImp.m */; };
 		0496786416D97379002B95E8 /* MobiSageOfferwall.m in Sources */ = {isa = PBXBuildFile; fileRef = 0496786316D97379002B95E8 /* MobiSageOfferwall.m */; };
@@ -906,8 +906,8 @@
 		0495DCB5168E573000AC7985 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		0495DCB7168E573000AC7985 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		0495DCB9168E573000AC7985 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		04964A3C16BE4890000B57EB /* Response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Response.h; sourceTree = "<group>"; };
-		04964A3D16BE4890000B57EB /* Response.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Response.m; sourceTree = "<group>"; };
+		04964A3C16BE4890000B57EB /* ResponseJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResponseJson.h; sourceTree = "<group>"; };
+		04964A3D16BE4890000B57EB /* ResponseJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResponseJson.m; sourceTree = "<group>"; };
 		04964A4A16BE832F000B57EB /* UITableViewCellResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewCellResponse.h; sourceTree = "<group>"; };
 		04964A4B16BE832F000B57EB /* UITableViewCellResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewCellResponse.m; sourceTree = "<group>"; };
 		0496785E16D9722B002B95E8 /* MobiSageRecommendDelegateImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobiSageRecommendDelegateImp.h; sourceTree = "<group>"; };
@@ -1627,8 +1627,8 @@
 				048F7D1716ABC28C00BEE3F1 /* Status.m */,
 				048F7D1816ABC28C00BEE3F1 /* User.h */,
 				048F7D1916ABC28C00BEE3F1 /* User.m */,
-				04964A3C16BE4890000B57EB /* Response.h */,
-				04964A3D16BE4890000B57EB /* Response.m */,
+				04964A3C16BE4890000B57EB /* ResponseJson.h */,
+				04964A3D16BE4890000B57EB /* ResponseJson.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2645,7 +2645,7 @@
 				04E039D616B0CC0A0086A77F /* ZJTStatusBarAlertWindow.m in Sources */,
 				04E039D716B0CC0A0086A77F /* LPBaseCell.m in Sources */,
 				04E039D816B0CC0A0086A77F /* StatusCell.m in Sources */,
-				04964A3E16BE4890000B57EB /* Response.m in Sources */,
+				04964A3E16BE4890000B57EB /* ResponseJson.m in Sources */,
 				04964A4C16BE832F000B57EB /* UITableViewCellResponse.m in Sources */,
 				04976CC716BEA298003C6E58 /* CellView.m in Sources */,
 				04976CC916BEA298003C6E58 /* CollectionViewController.m in Sources */,

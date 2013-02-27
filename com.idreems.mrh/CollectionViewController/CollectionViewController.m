@@ -11,6 +11,8 @@
 #import "ImageWithTextCell.h"
 #import "UIImageView+WebCache.h"
 #import "UITableViewCellResponse.h"
+#import "ImageViewController.h"
+#import "ResponseJson.h"
 @interface CollectionViewController ()
 
 @end
@@ -110,7 +112,7 @@
 
 #pragma mark PSCollectionViewDataSource
 - (PSCollectionViewCell *)collectionView:(PSCollectionView *)collectionView viewAtIndex:(NSInteger)index {
-    Response *item = [self.items objectAtIndex:index];
+    ResponseJson *item = [self.items objectAtIndex:index];
     
     // You should probably subclass PSCollectionViewCell
     ImageWithTextCell *v = (ImageWithTextCell *)[self.collectionView dequeueReusableView];
@@ -131,6 +133,13 @@
 
 - (void)collectionView:(PSCollectionView *)collectionView didSelectView:(PSCollectionViewCell *)view atIndex:(NSInteger)index {
     // Do something with the tap
+    NSLog(@"didSelect:%d",index);
+    ImageViewController* detail = [[[ImageViewController alloc]init]autorelease];
+    
+    ResponseJson *currentItem = [self.items objectAtIndex:index];
+    
+    [detail initWithData:currentItem.description imageUrl:currentItem.largeUrl placeHolderImageUrl:currentItem.largeUrl imageWidth:1 imageHeight:1];
+	[self.navigationController pushViewController:detail animated:YES];
 }
 
 - (NSInteger)numberOfViewsInCollectionView:(PSCollectionView *)collectionView {

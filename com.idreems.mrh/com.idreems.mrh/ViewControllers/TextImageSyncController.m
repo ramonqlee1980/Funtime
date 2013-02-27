@@ -8,7 +8,7 @@
 
 #import "TextImageSyncController.h"
 #import "ImageWithTextCell.h"
-#import "Response.h"
+#import "ResponseJson.h"
 #import "FileModel.h"
 #import "CommonHelper.h"
 #import "AppDelegate.h"
@@ -140,7 +140,7 @@
         if (res && [res isKindOfClass:[NSDictionary class]]) {
             NSArray* arr = [res objectForKey:kWeiboTimelineResponseDataJson];
             for (id item in arr) {
-                Response* sts = [Response statusWithJsonDictionary:item];
+                ResponseJson* sts = [ResponseJson statusWithJsonDictionary:item];
                 [dataArray addObject:sts];
             }
         } else {

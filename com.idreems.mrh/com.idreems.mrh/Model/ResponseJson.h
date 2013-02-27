@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Response : NSObject
+@interface ResponseJson : NSObject
 {
     NSString* description;
     NSString* thumbnailUrl;
@@ -18,8 +18,8 @@
 @property(nonatomic,retain) NSString* thumbnailUrl;
 @property(nonatomic,retain) NSString* largeUrl;
 
-- (Response*)initWithJsonDictionary:(NSDictionary*)dict;
+- (ResponseJson*)initWithJsonDictionary:(NSDictionary*)dict;
 
-+ (Response*)statusWithJsonDictionary:(NSDictionary*)dict;
++ (ResponseJson*)statusWithJsonDictionary:(NSDictionary*)dict;
 
 @end

@@ -275,7 +275,7 @@ static SDImageCache *instance;
     }
     
     // First check the in-memory cache...
-    UIImage *image = [memCache objectForKey:key];
+    NSData *image = [memCache objectForKey:key];
     if (image)
     {
         // ...notify delegate immediately, no need to go async

@@ -7,22 +7,24 @@
 //
 
 #import "PSCollectionViewCell.h"
-@class Response;
+#define kPlaceholderImage @"loadingImage_50x118.png"
+
+@class ResponseJson;
 @interface ImageWithTextCell : PSCollectionViewCell
 {
-    Response* response;
+    ResponseJson* response;
     UIImageView* centerimageView;
     UILabel* label;
     UIImageView* footerView;
     UIImageView* imageView;
     UIButton* shareButton;
 }
-@property(nonatomic,retain)Response* response;
+@property(nonatomic,retain)ResponseJson* response;
 @property(nonatomic,assign)UIImageView* centerimageView;
 @property(nonatomic,assign)UILabel* label;
 @property(nonatomic,assign)UIImageView* imageView;
 @property(nonatomic,assign)UIImageView* footerView;
 @property(nonatomic,assign)UIButton* shareButton;
 
-+(CGSize)measureCell:(Response*)status width:(CGFloat)width;
++(CGSize)measureCell:(ResponseJson*)status width:(CGFloat)width;
 @end

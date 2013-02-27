@@ -12,7 +12,7 @@
 #import "FileModel.h"
 #import "AppDelegate.h"
 #import "CommonHelper.h"
-#import "Response.h"
+#import "ResponseJson.h"
 
 #define kTimelineJson @"http://www.idreems.com/php/embarrasepisode/embarrassing.php?type=image_latest&page=1&count=20"
 #define kFileName @"timelinejson"
@@ -124,7 +124,7 @@
             [dataArray removeAllObjects];
             NSArray* arr = [res objectForKey:kWeiboTimelineResponseDataJson];
             for (id item in arr) {
-                Response* sts = [Response statusWithJsonDictionary:item];
+                ResponseJson* sts = [ResponseJson statusWithJsonDictionary:item];
                 [dataArray addObject:sts];
             }            
         } else {

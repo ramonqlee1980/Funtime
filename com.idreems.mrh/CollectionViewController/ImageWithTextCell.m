@@ -7,7 +7,7 @@
 //
 
 #import "ImageWithTextCell.h"
-#import "Response.h"
+#import "ResponseJson.h"
 #import "ImageBrowser.h"
 #import "CommonHelper.h"
 #import <QuartzCore/QuartzCore.h>
@@ -19,7 +19,7 @@
 #define kShareButtonZoneSize 40
 #define kFooterViewHeight 15
 #define CELL_CONTENT_MARGIN 10.0f
-#define kPlaceholderImage @"loadingImage_50x118.png"
+#define kCellTextMaxLength 50
 
 @implementation ImageWithTextCell
 @synthesize response;
@@ -45,7 +45,7 @@
     // Drawing code
 }
 */
--(void)setResponse:(Response *)status
+-(void)setResponse:(ResponseJson *)status
 {
     if(response)
     {
@@ -117,7 +117,7 @@
     }
    
     CGFloat CELL_CONTENT_WIDTH = self.frame.size.width;
-    NSString *text = status.description;
+    NSString *text = [ImageWithTextCell trimText:status.description trimToLength:kCellTextMaxLength];
     CGSize size = CGSizeZero;
     CGFloat width = CELL_CONTENT_WIDTH - CELL_CONTENT_MARGIN * 2;
     if(!nullText)
@@ -305,10 +305,19 @@
     [[app keyWindow]addSubview:browserView];
 }
 
-+(CGSize)measureCell:(Response*)status width:(CGFloat)width
++(NSString*)trimText:(const NSString*const)txt trimToLength:(NSUInteger)len
+{
+    NSString* text = [txt copy];
+    if (text && text.length>len) {
+        text = [text substringToIndex:len];
+    }
+    return text;
+}
++(CGSize)measureCell:(ResponseJson*)status width:(CGFloat)width
 {
     BOOL nullText = ((nil==status.description)|(0==status.description.length));
-    NSString *text = status.description;
+    NSString *text = [ImageWithTextCell trimText:status.description trimToLength:kCellTextMaxLength];
+    
     CGFloat CELL_CONTENT_WIDTH = width;
     CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
     

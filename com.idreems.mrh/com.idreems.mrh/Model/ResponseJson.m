@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 ramonqlee. All rights reserved.
 //
 
-#import "Response.h"
+#import "ResponseJson.h"
 #import "NSDictionaryAdditions.h"
 
-@implementation Response
+@implementation ResponseJson
 @synthesize description;
 @synthesize thumbnailUrl;
 @synthesize largeUrl;
@@ -20,7 +20,7 @@
     {
         return NO;
     }
-    Response* cmp = (Response*)object;
+    ResponseJson* cmp = (ResponseJson*)object;
     if(0==[self.description length])
     {
         return [self.thumbnailUrl isEqualToString:cmp.thumbnailUrl];
@@ -30,7 +30,7 @@
         return [self.description isEqualToString:cmp.description];
     }
 }
-- (Response*)initWithJsonDictionary:(NSDictionary*)dict
+- (ResponseJson*)initWithJsonDictionary:(NSDictionary*)dict
 {
     if (self = [super init]) {
 		self.description = [dict getStringValueForKey:@"description" defaultValue:@""];
@@ -40,9 +40,9 @@
     return self;
 }
 
-+ (Response*)statusWithJsonDictionary:(NSDictionary*)dict
++ (ResponseJson*)statusWithJsonDictionary:(NSDictionary*)dict
 {
-    return [[[Response alloc]initWithJsonDictionary:dict]autorelease];
+    return [[[ResponseJson alloc]initWithJsonDictionary:dict]autorelease];
 }
 
 

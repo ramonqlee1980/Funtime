@@ -7,7 +7,7 @@
 //
 
 #import "UITableViewCellResponse.h"
-#import "Response.h"
+#import "ResponseJson.h"
 #import "ImageBrowser.h"
 
 #define FONT_SIZE 14.0f
@@ -29,7 +29,7 @@
     }
     return self;
 }
--(void)setResponse:(Response *)status
+-(void)setResponse:(ResponseJson *)status
 {
     if(response)
     {
@@ -138,7 +138,7 @@
     [[app keyWindow]addSubview:browserView];
 }
 
-+(CGSize)measureCell:(Response*)status
++(CGSize)measureCell:(ResponseJson*)status
 {
     BOOL nullText = ((nil==status.description)|(0==status.description.length));
     NSString *text = status.description;

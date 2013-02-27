@@ -7,17 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-@class  Response;
+@class  ResponseJson;
 
 @interface UITableViewCellResponse : UITableViewCell
 {
-    Response* response;
+    ResponseJson* response;
     UILabel* label;
     UIImageView* imageView;
 }
-@property(nonatomic,retain)Response* response;
+@property(nonatomic,retain)ResponseJson* response;
 @property(nonatomic,assign)UILabel* label;
 @property(nonatomic,assign)UIImageView* imageView;
 
-+(CGSize)measureCell:(Response*)status;
++(CGSize)measureCell:(ResponseJson*)status;
 @end

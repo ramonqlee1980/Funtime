@@ -60,7 +60,7 @@
     self.imageUrl = url;
     self.placeholderImageUrl = ph;
     imageHeight = height;
-    imageWidth = width;    
+    imageWidth = width;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -71,29 +71,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //self.tabBarController.tabBar.hidden = YES;
-    UIImage* placeHolderImage = [[SDWebImageManager sharedManager]imageWithURL:[NSURL URLWithString:self.placeholderImageUrl]];
-    UIImage *backgroundImage = placeHolderImage?placeHolderImage:[UIImage imageNamed:kPlaceholderImage];
-    
-    //adjust width
-    CGFloat scale = (CGFloat)kDeviceWidth/imageWidth;
-    CGRect backgroundRect = CGRectMake(0, 0,imageWidth*scale, imageHeight*scale);
-    //height still exceed
-    if(backgroundRect.size.height>KDeviceHeight/2)
+    UIImageView *backgroundImageView = nil;
+    if(self.imageUrl && self.imageUrl.length>0)
     {
-        scale = (CGFloat)KDeviceHeight/(backgroundRect.size.height*2);
-        backgroundRect.size.height *= scale;
-        backgroundRect.size.width  *= scale;
+        //self.tabBarController.tabBar.hidden = YES;
+        UIImage* placeHolderImage = [[SDWebImageManager sharedManager]imageWithURL:[NSURL URLWithString:self.placeholderImageUrl]];
+        UIImage *backgroundImage = placeHolderImage?placeHolderImage:[UIImage imageNamed:kPlaceholderImage];
+        
+        //adjust width
+        CGFloat scale = (CGFloat)kDeviceWidth/imageWidth;
+        CGRect backgroundRect = CGRectMake(0, 0,imageWidth*scale, imageHeight*scale);
+        //height still exceed
+        if(backgroundRect.size.height>KDeviceHeight/2)
+        {
+            scale = (CGFloat)KDeviceHeight/(backgroundRect.size.height*2);
+            backgroundRect.size.height *= scale;
+            backgroundRect.size.width  *= scale;
+        }
+        
+        backgroundImageView = [[UIImageView alloc] initWithFrame:backgroundRect];
+        //    backgroundImageView.image = backgroundImage;
+        if([backgroundImageView respondsToSelector:@selector(setImageWithURL:placeholderImage:)])
+        {
+            [backgroundImageView setImageWithURL:[NSURL URLWithString:self.imageUrl] placeholderImage:backgroundImage];
+        }
+        backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
     }
     
-    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:backgroundRect];
-//    backgroundImageView.image = backgroundImage;
-    if([backgroundImageView respondsToSelector:@selector(setImageWithURL:placeholderImage:)])
-    {
-        [backgroundImageView setImageWithURL:[NSURL URLWithString:self.imageUrl] placeholderImage:backgroundImage];
-    }
-    backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
-
     CGRect textRect = CGRectMake(0, 0, self.view.frame.size.width, [UIScreen mainScreen].bounds.size.height);
     UITextView *textView = [[UITextView alloc] initWithFrame:textRect];
     textView.text = self.text;
@@ -101,12 +105,12 @@
     textView.font = [UIFont systemFontOfSize:kTextFontSize];
     textView.textColor = [UIColor darkTextColor];
     textView.editable = NO;
-
+    
     MDCParallaxView *parallaxView = [[MDCParallaxView alloc] initWithBackgroundView:backgroundImageView
                                                                      foregroundView:textView];
     parallaxView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     parallaxView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    parallaxView.backgroundHeight = 250.0f;
+    parallaxView.backgroundHeight = backgroundImageView?250.0f:0.0f;
     parallaxView.scrollViewDelegate = self;
     [self.view addSubview:parallaxView];
 }

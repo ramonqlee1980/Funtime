@@ -7,7 +7,6 @@
 //
 
 #import "StatusViewContrillerBase.h"
-#import "Response.h"
 #import "UITableViewCellResponse.h"
 
 
