@@ -36,7 +36,10 @@
     
     self.contentTF.text = status.text;
     self.userNameLB.text = status.user.screenName;
-    [self.avatarImage setImageWithURL:[NSURL URLWithString:status.user.profileImageUrl]];
+    if([self.avatarImage respondsToSelector:@selector(setImageWithURL:)])
+    {
+        [self.avatarImage performSelector:@selector(setImageWithURL:) withObject:[NSURL URLWithString:status.user.profileImageUrl]];
+    }
     
     fromLB.text = [NSString stringWithFormat:@"来自:%@",status.source];
 #if 0
@@ -57,8 +60,11 @@
         NSString *url = status.retweetedStatus.thumbnailPic;
         
         if (![imageData isEqual:[NSNull null]])
-        {
-            [self.retwitterContentImage setImageWithURL:[NSURL URLWithString:url]];
+        {            
+            if([self.retwitterContentImage respondsToSelector:@selector(setImageWithURL:)])
+            {
+                [self.retwitterContentImage performSelector:@selector(setImageWithURL:) withObject:[NSURL URLWithString:url]];
+            }
         }        
         
         self.retwitterContentImage.hidden = url != nil && [url length] != 0 ? NO : YES;
@@ -72,7 +78,10 @@
         NSString *url = status.thumbnailPic;
         
         if (![imageData isEqual:[NSNull null]]) {
-            [self.contentImage setImageWithURL:[NSURL URLWithString:url]];
+            if([self.contentImage respondsToSelector:@selector(setImageWithURL:)])
+            {
+                [self.contentImage performSelector:@selector(setImageWithURL:) withObject:[NSURL URLWithString:url]];
+            }
         }
         
         

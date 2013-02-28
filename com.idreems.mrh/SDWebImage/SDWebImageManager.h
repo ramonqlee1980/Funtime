@@ -20,7 +20,7 @@
 }
 
 + (id)sharedManager;
-- (UIImage *)imageWithURL:(NSURL *)url;
+- (NSData *)imageWithURL:(NSURL *)url;
 - (void)downloadWithURL:(NSURL *)url delegate:(id<SDWebImageManagerDelegate>)delegate;
 - (void)downloadWithURL:(NSURL *)url delegate:(id<SDWebImageManagerDelegate>)delegate retryFailed:(BOOL)retryFailed;
 - (void)cancelForDelegate:(id<SDWebImageManagerDelegate>)delegate;

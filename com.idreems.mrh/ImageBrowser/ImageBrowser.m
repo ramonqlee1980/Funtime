@@ -97,9 +97,12 @@
     aScrollView.zoomScale = 1.0;
     [imageView setImage:image];
     if (bigImageURL!=nil) 
-    {
-        //[[HHNetDataCacheManager getInstance] getDataWithURL:bigImageURL];
-        [imageView setImageWithURL:[NSURL URLWithString:bigImageURL] placeholderImage:image];
+    {       
+        if([imageView respondsToSelector:@selector(setImageWithURL:placeholderImage:)])
+        {
+            [imageView performSelector:@selector(setImageWithURL:placeholderImage:) withObject:[NSURL URLWithString:bigImageURL] withObject:image];
+        }
+        
     }
 }
 

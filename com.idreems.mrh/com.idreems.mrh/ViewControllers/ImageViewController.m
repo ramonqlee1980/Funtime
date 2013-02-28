@@ -75,7 +75,10 @@
     if(self.imageUrl && self.imageUrl.length>0)
     {
         //self.tabBarController.tabBar.hidden = YES;
-        UIImage* placeHolderImage = [[SDWebImageManager sharedManager]imageWithURL:[NSURL URLWithString:self.placeholderImageUrl]];
+        NSData* imageData = [[SDWebImageManager sharedManager]imageWithURL:[NSURL URLWithString:self.placeholderImageUrl]];
+        
+        UIImage* placeHolderImage = [UIImage imageWithData:imageData];
+        
         UIImage *backgroundImage = placeHolderImage?placeHolderImage:[UIImage imageNamed:kPlaceholderImage];
         
         //adjust width
@@ -93,7 +96,7 @@
         //    backgroundImageView.image = backgroundImage;
         if([backgroundImageView respondsToSelector:@selector(setImageWithURL:placeholderImage:)])
         {
-            [backgroundImageView setImageWithURL:[NSURL URLWithString:self.imageUrl] placeholderImage:backgroundImage];
+            [backgroundImageView performSelector:@selector(setImageWithURL:placeholderImage:) withObject:[NSURL URLWithString:self.imageUrl] withObject:backgroundImage];            
         }
         backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
     }

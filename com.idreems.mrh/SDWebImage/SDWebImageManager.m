@@ -49,7 +49,7 @@ static SDWebImageManager *instance;
 /**
  * @deprecated
  */
-- (UIImage *)imageWithURL:(NSURL *)url
+- (NSData *)imageWithURL:(NSURL *)url
 {
     return [[SDImageCache sharedImageCache] imageFromKey:[url absoluteString]];
 }
@@ -104,6 +104,7 @@ static SDWebImageManager *instance;
     {
         [delegate performSelector:@selector(webImageManager:didFinishWithImage:) withObject:[[info objectForKey:kURL] absoluteString] withObject:image];
     }
+
 }
 
 - (void)imageCache:(SDImageCache *)imageCache didNotFindImageForKey:(NSString *)key userInfo:(NSDictionary *)info
@@ -159,10 +160,10 @@ static SDWebImageManager *instance;
         }
     }
 
-    if (image)
+    if (image && image.length)
     {
         // Store the image in the cache
-        [[SDImageCache sharedImageCache] storeImage:image
+        [[SDImageCache sharedImageCache] storeImage:[UIImage imageWithData:image]
                                           imageData:downloader.imageData
                                              forKey:[downloader.url absoluteString]
                                              toDisk:YES];

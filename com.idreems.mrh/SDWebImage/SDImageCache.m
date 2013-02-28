@@ -132,7 +132,7 @@ static SDImageCache *instance;
     {
         // If no data representation given, convert the UIImage in JPEG and store it
         // This trick is more CPU/memory intensive and doesn't preserve alpha channel
-        UIImage *image = [[self imageFromKey:key fromDisk:YES] retain]; // be thread safe with no lock
+        NSData *image = [[self imageFromKey:key fromDisk:YES] retain]; // be thread safe with no lock
         if (image)
         {
 #if !TARGET_OS_IPHONE
@@ -140,7 +140,7 @@ static SDImageCache *instance;
             NSData* jpegData = [NSBitmapImageRep representationOfImageRepsInArray: representations usingType: NSJPEGFileType properties:nil];
             [fileManager createFileAtPath:[self cachePathForKey:key] contents:jpegData attributes:nil];
 #else
-            [fileManager createFileAtPath:[self cachePathForKey:key] contents:UIImageJPEGRepresentation(image, (CGFloat)1.0) attributes:nil];
+            [fileManager createFileAtPath:[self cachePathForKey:key] contents:image attributes:nil];
             [image release];
 #endif
         }
@@ -202,7 +202,7 @@ static SDImageCache *instance;
         return;
     }
     
-    [memCache setObject:image forKey:key];
+    [memCache setObject:data forKey:key];
     
     if (toDisk)
     {
@@ -221,34 +221,34 @@ static SDImageCache *instance;
     }
 }
 
-- (void)storeImage:(UIImage *)image forKey:(NSString *)key
+- (void)storeImage:(NSData *)image forKey:(NSString *)key
 {
-    [self storeImage:image imageData:nil forKey:key toDisk:YES];
+    [self storeImage:nil imageData:image forKey:key toDisk:YES];
 }
 
-- (void)storeImage:(UIImage *)image forKey:(NSString *)key toDisk:(BOOL)toDisk
+- (void)storeImage:(NSData *)image forKey:(NSString *)key toDisk:(BOOL)toDisk
 {
-    [self storeImage:image imageData:nil forKey:key toDisk:toDisk];
+    [self storeImage:nil imageData:image forKey:key toDisk:toDisk];
 }
 
 
-- (UIImage *)imageFromKey:(NSString *)key
+- (NSData *)imageFromKey:(NSString *)key
 {
     return [self imageFromKey:key fromDisk:YES];
 }
 
-- (UIImage *)imageFromKey:(NSString *)key fromDisk:(BOOL)fromDisk
+- (NSData *)imageFromKey:(NSString *)key fromDisk:(BOOL)fromDisk
 {
     if (key == nil)
     {
         return nil;
     }
     
-    UIImage *image = [memCache objectForKey:key];
+    NSData *image = [memCache objectForKey:key];
     
     if (!image && fromDisk)
     {
-        image = [[[UIImage alloc] initWithContentsOfFile:[self cachePathForKey:key]] autorelease];
+        image = [[NSData dataWithContentsOfFile:[self cachePathForKey:key]] autorelease];
         if (image)
         {
             [memCache setObject:image forKey:key];
@@ -276,7 +276,7 @@ static SDImageCache *instance;
     
     // First check the in-memory cache...
     NSData *image = [memCache objectForKey:key];
-    if (image)
+    if (image && image.length)
     {
         // ...notify delegate immediately, no need to go async
         if ([delegate respondsToSelector:@selector(imageCache:didFindImage:forKey:userInfo:)])

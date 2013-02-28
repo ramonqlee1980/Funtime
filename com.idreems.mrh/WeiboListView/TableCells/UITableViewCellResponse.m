@@ -56,8 +56,8 @@
         imageView = [[[UIImageView alloc]initWithFrame:placeholderImageRect]autorelease];
         imageView.userInteractionEnabled = YES;
         if([imageView respondsToSelector:@selector(setImageWithURL:placeholderImage:)])
-        {
-            [imageView setImageWithURL:[NSURL URLWithString:status.thumbnailUrl] placeholderImage:placeholderImage];
+        {           
+            [imageView performSelector:@selector(setImageWithURL:placeholderImage:) withObject:[NSURL URLWithString:status.thumbnailUrl] withObject:placeholderImage];
         }
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.bounds = placeholderImageRect;
@@ -97,8 +97,8 @@
         placeholderImageRect.origin.x += (kDeviceWidth-placeholderImage.size.width)/2;
         //without text
         if(!nullText)
-        {
-            [imageView setImageWithURL:[NSURL URLWithString:status.thumbnailUrl] placeholderImage:placeholderImage];
+        {            
+            [imageView performSelector:@selector(setImageWithURL:placeholderImage:) withObject:[NSURL URLWithString:status.thumbnailUrl] withObject:placeholderImage];
             
             placeholderImageRect.origin.y += (CELL_CONTENT_MARGIN+textHeight+CELL_CONTENT_MARGIN);
         }

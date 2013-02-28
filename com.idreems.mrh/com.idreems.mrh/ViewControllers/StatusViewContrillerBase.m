@@ -267,9 +267,9 @@
 }
 
 #pragma mark update Data
--(void)startNetworkRequest
+-(NSString*)startNetworkRequest
 {
-    
+    return @"";
 }
 #pragma mark -
 #pragma mark EGORefreshTableHeaderDelegate Methods
